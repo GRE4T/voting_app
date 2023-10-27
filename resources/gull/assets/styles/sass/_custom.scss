@@ -1,0 +1,53 @@
+.auth-layout-wrap {
+    background-repeat: no-repeat;
+    background-position-y: top;
+    background-position-x: right;
+    background-size: auto !important;
+}
+
+.layout-sidebar-large {
+    .main-header {
+        .logo {
+            img {
+                width: 75px !important;
+                height: 75px !important;
+            }
+        }
+    }
+}
+
+.breadcrumb ul li::after {
+    content: none !important;
+}
+
+table.dataTable tbody td {
+    max-width: 350px;
+}
+
+
+.table-scroll::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+
+.table-scroll::-webkit-scrollbar-button:increment, .table-scroll::-webkit-scrollbar-button {
+    display: none;
+}
+
+.table-scroll::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.select2-container{
+    display: unset !important;
+}

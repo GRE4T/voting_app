@@ -1,0 +1,11 @@
+.main-content-wrap {
+    background-image: url("../../images/bg-login.png") !important;
+    background-repeat: no-repeat !important;
+    background-position-x: right !important;
+    background-position-y: top !important;
+    background-size: 300px !important;
+}
+
+.shortcut-profile{
+    max-width:3rem;
+}
