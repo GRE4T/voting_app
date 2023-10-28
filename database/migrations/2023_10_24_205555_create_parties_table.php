@@ -18,6 +18,7 @@ class CreatePartiesTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
             $table->integer('number_candidates');
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

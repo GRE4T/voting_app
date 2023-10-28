@@ -38,18 +38,37 @@
                             </span>
             @enderror
         </div>
+        <div class="form-group col-12">
+            <label class="" for="image"><i class="i-File-Text--Image text-16 mr-1"></i>Imagen</label>
+            <div class="p-0 border">
+                <div style="height: 230px;" class="d-flex justify-content-center my-2">
+                    <img id="image" class="border img-fluid @if(!$record->image) w-20 @endif"  src="{{ asset($record->image) }}" alt="image" />
+                </div>
+                <label class="btn border btn-block mb-0 text-30 text-primary">
+                    <input id="image" name="image" data-info="image" type="file"  onchange="readImage(event)" >
+                </label>
+            </div>
+            @error('image')
+            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+            @enderror
+        </div>
     </div>
 
     @foreach($parties as $party)
             <div class="form-row">
                 <div class="col-12 py-3">
                     <div class="table-responsive table-scroll">
-                        <table class="table table-bordered mb-0">
+                        <table class="table table-bordered mb-0 table-votes">
                             <tr>
-                                <th rowspan="2" scope="col"> {{ $party->name  }}</th>
+                                <th rowspan="2" scope="col">
+                                    <span class="mb-1 d-block">{{ $party->name  }}</span>
+                                    <img src="{{ asset($party->image) }}" alt="" class="img-fluid party-image">
+                                </th>
                                 <th scope="row">Candidato</th>
                                 @for($i = 1;  $i < ($party->number_candidates + 1); $i++)
-                                    <th scope="col"> {{ $i }}</th>
+                                    <th scope="col" class="vote-column"> {{ $i }}</th>
                                 @endfor
                             </tr>
                             <tr>
@@ -60,10 +79,9 @@
                                             $name = "votes[$party->id][$i]";
                                             $validate = "votes.$party->id.$i";
                                             $data = $record->votes_cast->isEmpty() || !isset($record->votes_cast[$party->id]) ? [] : $record->votes_cast[$party->id]->pluck('votes', 'number_candidate')->toArray();
-                                            // dd($data);
                                         @endphp
                                         <input type="number" name="{{ $name }}" class="form-control" required placeholder="Ingresar cantidad de votos" min="0" step="1"
-                                        @if(old($validate)) value="{{ old($validate) }}" @else value="{{ $data[$i] ?? '' }}" @endif>
+                                        @if(old($validate)) value="{{ old($validate) }}" @else value="{{ $data[$i] ?? 0 }}" @endif>
                                         @error($validate)
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -98,6 +116,20 @@
                     }
                 });
             });
+
+            function readImage(event) {
+                let input = event.target;
+                let id = $(input).data("info");
+                let element = $(`#${id}`);
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        element.attr("src", e.target.result);
+                        element.removeClass("w-20");
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
 
         </script>
 

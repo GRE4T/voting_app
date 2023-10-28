@@ -18,6 +18,7 @@ class CreateRecordsTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId("voting_booth_id")->constrained("voting_booths");
             $table->integer('number_table');
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

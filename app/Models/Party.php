@@ -12,7 +12,8 @@ class Party extends Model
     protected  $fillable = [
         'user_id',
         'name',
-        'number_tables'
+        'number_tables',
+        'image'
     ];
 
     protected $casts = [

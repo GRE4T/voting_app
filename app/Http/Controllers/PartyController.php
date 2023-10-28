@@ -8,6 +8,7 @@ use App\Models\Party;
 
 class PartyController extends Controller
 {
+    const STORAGE_PATH = 'storage/images/parties';
     /**
      * Display a listing of the resource.
      *
@@ -42,6 +43,14 @@ class PartyController extends Controller
         $party->user_id = $request->user()->id;
         $party->name = $request->name;
         $party->number_candidates = $request->number_candidates;
+
+        if($request->hasFile('image')) {
+            $name = uniqid() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path(self::STORAGE_PATH), $name);
+            $party->image = self::STORAGE_PATH . '/' . $name;
+        }
+
+
         $party->save();
 
         return redirect()->route('parties.index');
@@ -83,6 +92,13 @@ class PartyController extends Controller
         $party->user_id = $request->user()->id;
         $party->name = $request->name;
         $party->number_candidates = $request->number_candidates;
+
+        if($request->hasFile('image')) {
+            $name = uniqid() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path(self::STORAGE_PATH), $name);
+            $party->image = self::STORAGE_PATH . '/' . $name;
+        }
+
         $party->update();
 
         return redirect()->route('parties.index');

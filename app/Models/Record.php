@@ -13,6 +13,7 @@ class Record extends Model
         'user_id',
         'voting_booth_id',
         'number_table',
+        'image'
     ];
 
     protected $appends = [

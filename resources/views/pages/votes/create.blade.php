@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('main-content')
 
-    <form action="{{  route('records.store')  }}" method="POST">
+    <form action="{{  route('records.store')  }}" method="POST" enctype="multipart/form-data">
 
         <div class="card">
             <div class="card-header bg-primary text-white h5">

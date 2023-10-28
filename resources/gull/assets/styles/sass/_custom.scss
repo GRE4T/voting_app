@@ -51,3 +51,21 @@ table.dataTable tbody td {
 .select2-container{
     display: unset !important;
 }
+
+.table-votes td, .table-votes th {
+    min-width: 6.25rem;
+}
+
+.party-image{
+    width: 100px;
+    &.image-small{
+        width: 50px;
+    }
+}
+
+@media print {
+
+    * {
+       visibility: visible !important;
+    }
+}

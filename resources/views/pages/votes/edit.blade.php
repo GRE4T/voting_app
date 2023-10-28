@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('main-content')
 
-    <form action="{{  route('records.update', $record->id)  }}" method="POST">
+    <form action="{{  route('records.update', $record->id)  }}" method="POST" enctype="multipart/form-data">
         @method('PATCH')
         <div class="card">
             <div class="card-header bg-primary text-white h5">

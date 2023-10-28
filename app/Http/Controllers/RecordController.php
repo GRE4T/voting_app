@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class RecordController extends Controller
 {
+    const STORAGE_PATH = 'storage/images/records';
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +52,13 @@ class RecordController extends Controller
             $record->user_id = $request->user()->id;
             $record->voting_booth_id = $request->voting_booth_id;
             $record->number_table = $request->number_table;
+
+            if($request->hasFile('image')) {
+                $name = uniqid() . $request->file('image')->getClientOriginalName();
+                $request->file('image')->move(public_path(self::STORAGE_PATH), $name);
+                $record->image = self::STORAGE_PATH . '/' . $name;
+            }
+
             $record->save();
 
             foreach ($request->votes as $party => $item) {
@@ -108,6 +116,11 @@ class RecordController extends Controller
             $record->user_id = $request->user()->id;
             $record->voting_booth_id = $request->voting_booth_id;
             $record->number_table = $request->number_table;
+            if($request->hasFile('image')) {
+                $name = uniqid() . $request->file('image')->getClientOriginalName();
+                $request->file('image')->move(public_path(self::STORAGE_PATH), $name);
+                $record->image = self::STORAGE_PATH . '/' . $name;
+            }
             $record->update();
 
             foreach ($request->votes as $party => $item) {
@@ -139,5 +152,13 @@ class RecordController extends Controller
     {
         $record->delete();
         return redirect()->route('records.index');
+    }
+
+    public function report(Record $record)
+    {
+        return view('pages.votes.report', [
+            'record' => $record,
+            'parties' => Party::all()
+        ]);
     }
 }

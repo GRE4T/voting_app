@@ -45,6 +45,22 @@ table.dataTable tbody td {
   display: unset !important;
 }
 
+.table-votes td, .table-votes th {
+  min-width: 6.25rem;
+}
+
+.party-image {
+  width: 100px;
+}
+.party-image.image-small {
+  width: 50px;
+}
+
+@media print {
+  * {
+    visibility: visible !important;
+  }
+}
 /*!
  * Bootstrap v4.6.2 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors

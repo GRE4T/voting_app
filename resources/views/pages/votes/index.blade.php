@@ -42,6 +42,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Puesto de votación</th>
                         <th scope="col">Mesa</th>
+                        <th scope="col">Imagen</th>
                         <th scope="col">Votación</th>
                         <th scope="col">Responsable</th>
                         <th scope="col">Acción</th>
@@ -51,7 +52,6 @@
                     </tbody>
                 </table>
             </div>
-            </p>
         </div>
     </div>
 @endsection
@@ -109,6 +109,13 @@
                         data: 'number_table'
                     },
                     {
+                        data: 'image',
+                        render(data, type, row, meta) {
+
+                            return data ? `<a href="{{asset('')}}/${data}" download="${row.voting_booth.name}- Mesa ${row.number_table}">Descargar <i class="nav-icon i-Download1 font-weight-bold"></i></a>`: '';
+                        }
+                    },
+                    {
                         data: 'votes_cast',
                         render(data) {
                             let tables = ``;
@@ -125,7 +132,8 @@
                                     });
                                     tables += `<div class="table-responsive table-scroll">
                                                        <table class="table table-bordered">
-                                                            <thead><tr><th colspan="${party.number_candidates + 1}">Partido: ${party.name}</th></tr><tr> ${header} </tr> </thead>
+                                                            <thead><tr><th colspan="${party.number_candidates + 1}">
+                                                                <img src="{{asset('')}}/${party.image}" alt="" class="party-image image-small"> Partido: ${party.name} </th></tr><tr> ${header} </tr> </thead>
                                                             <tbody> <tr> ${body} </tr> </tbody>
                                                        </table>
                                                 </div>`;
@@ -141,6 +149,9 @@
                         data: 'id',
                         render(data) {
                             return `
+                    <a href="{{ url('records') }}/${data}/report" class="text-success mr-2">
+                        <i class="nav-icon i-Eye-Visible font-weight-bold"></i>
+                    </a>
                     <a href="{{ url('records') }}/${data}/edit" class="text-success mr-2">
                         <i class="nav-icon i-Pen-2 font-weight-bold"></i>
                     </a>

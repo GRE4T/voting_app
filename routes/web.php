@@ -46,7 +46,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/voting-booths', VotingBoothsController::class)->except('show');
         Route::resource('/parties', PartyController::class)->except('show');
+        Route::get('/records/{record}/report', [RecordController::class, 'report'])->name('records.report');
         Route::resource('/records', RecordController::class)->except('show');
+
 
         //Users
         Route::resource('/users', UserController::class)->except('show')->middleware('admin');

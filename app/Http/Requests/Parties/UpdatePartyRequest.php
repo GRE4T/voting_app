@@ -26,6 +26,7 @@ class UpdatePartyRequest extends FormRequest
         return [
             'name' =>'required|string|max:255',
             'number_candidates' =>'required|integer|min:1|max:50',
+            'image' =>'nullable|image'
         ];
     }
 }

@@ -26,6 +26,7 @@ class UpdateRecordRequest extends FormRequest
     {
         return [
             'voting_booth_id' => 'required|exists:voting_booths,id',
+            'image' =>'nullable|image',
             'number_table' => 'required|integer',
             'votes' => 'required|array',
             'votes.*.*' => [

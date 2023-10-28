@@ -26,6 +26,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Cantidad de candidatos</th>
+                        <th scope="col">Imagen</th>
                         <th scope="col">Fecha de creación</th>
                         <th scope="col">Fecha de actualización</th>
                         <th scope="col">Responsable</th>
@@ -36,7 +37,6 @@
                     </tbody>
                 </table>
             </div>
-            </p>
         </div>
     </div>
 @endsection
@@ -80,6 +80,12 @@
                     },
                     {
                         data: 'number_candidates',
+                    },
+                    {
+                        data: 'image',
+                        render(data) {
+                            return `<img src="{{asset('')}}/${data}" alt="" class="party-image">`;
+                        }
                     },
                     {
                         data: 'created_at'

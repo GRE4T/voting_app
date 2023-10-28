@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('main-content')
 
-    <form action="{{  route('parties.update', $party->id)  }}" method="POST">
+    <form action="{{  route('parties.update', $party->id)  }}" method="POST" enctype="multipart/form-data">
         @method('PATCH')
         <div class="card">
             <div class="card-header bg-primary text-white h5">
@@ -14,4 +14,7 @@
             </div>
         </div>
     </form>
+@endsection
+@section('bottom-js')
+    @stack('stack-script')
 @endsection
